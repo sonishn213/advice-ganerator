@@ -1,9 +1,19 @@
 const Api_link = "https://api.adviceslip.com/advice";
 
+const dice = document.querySelector("#dice");
+window.onload = () => {
+  dice.addEventListener("click", (e) => {
+    getAdvice();
+  });
+};
 async function getAdvice() {
   const advice = document.querySelector("#adviceText");
-  const response = await fetch(Api_link);
-  const data = await response.json();
-
-  advice.textContent = await data.slip.advice;
+  advice.textContent = "Loading...";
+  let response = await fetch(Api_link);
+  let data = await response.json();
+  fetchedData(await data);
+  advice.textContent = data.slip.advice;
+}
+function fetchedData(data) {
+  console.log(data);
 }
